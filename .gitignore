@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Models
+*.pt
+*.pth
+*.ckpt
+
+# Data
+data/
+datasets/
+data_folder_ptb_xl/
+
+# Env
+.env
+venv/
+conda/
+
+# VSCode
+.vscode/
+
+# Logs
+logs/
+wandb/
