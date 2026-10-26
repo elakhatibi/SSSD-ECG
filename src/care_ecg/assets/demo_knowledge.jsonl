@@ -1,0 +1,5 @@
+{"doc_id":"care-method-1","text":"CARE-ECG derives diagnostic probabilities from discretized latent ECG factors using a Bayesian network.","source":"CARE-ECG paper, Section 3.2","metadata":{"scope":"method"}}
+{"doc_id":"care-method-2","text":"A counterfactual latent-factor edit is a local model sensitivity analysis and is not an actionable physiological intervention.","source":"CARE-ECG paper, Discussion","metadata":{"scope":"safety"}}
+{"doc_id":"care-method-3","text":"Generated ECG explanations should be checked against retrieved evidence and unsupported waveform findings should be rejected.","source":"CARE-ECG paper, Sections 3.4-3.5","metadata":{"scope":"verification"}}
+{"doc_id":"care-method-4","text":"The learned graph can reflect observational dependencies, dataset confounding, or discretization artifacts rather than true interventional causality.","source":"CARE-ECG paper, Discussion","metadata":{"scope":"limitations"}}
+{"doc_id":"care-method-5","text":"Latent dimensions are not guaranteed to correspond directly to standard ECG measurements such as QTc, PR, or QRS duration.","source":"CARE-ECG paper, Discussion","metadata":{"scope":"limitations"}}

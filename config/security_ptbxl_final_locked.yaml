@@ -1,0 +1,62 @@
+schema_version: care-ecg-security-config.v1
+
+protocol:
+  phase: validation
+  query: Which diagnosis is most supported, and why?
+  targets: [T1]
+  budgets: [1, 3]
+  seeds: [17, 42, 73]
+  validation_folds: [9]
+  heldout_folds: [10]
+  max_candidate_patients_per_target: 30
+  max_eligible_patients_per_target: 10
+  defense: v1
+  validation_dataset_sha256: b15dc0b71d0400d0697d5b0cbdb4362aaf093ebeb3521d2ec1a21e0a4812755e
+  heldout_dataset_sha256: fd90c55c047d5f37a196e98aa127a83629eecd4622c653653fd9511cc33c1868
+
+attacks:
+  enabled: [f1_pgd, f1_cf, f3_k2, f3_k3]
+  common:
+    epsilon_mv: 0.02
+    step_size_mv: 0.002
+    steps: 40
+    restarts: 3
+    random_start: true
+    confidence: 3.0
+  f1_cf:
+    latent_weight: 1.0
+    latent_margin: 0.001
+  f3_k2:
+    diagnosis_weight: 1.0
+    retrieval_weight: 1.0
+    verifier_weight: 1.0
+    defense_weight: 0.0
+  f3_k3:
+    diagnosis_weight: 1.0
+    retrieval_weight: 1.0
+    verifier_weight: 1.0
+    defense_weight: 0.0
+
+constraints:
+  enabled: [s_inf, s_spec]
+  s_inf:
+    epsilon_mv: 0.02
+  s_spec:
+    epsilon_mv: 0.02
+    cutoff_hz: 40.0
+    max_high_frequency_ratio: 0.05
+    max_slew_mv: 0.01
+
+admissibility:
+  enabled: true
+  backend: scipy
+  required:
+    - heart_rate_bpm
+    - rhythm_irregularity
+    - pr_ms
+    - qrs_ms
+    - qtc_ms
+    - st_deviation_mv
+
+export:
+  excel: true

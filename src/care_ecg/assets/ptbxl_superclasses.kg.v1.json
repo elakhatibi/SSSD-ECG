@@ -1,0 +1,140 @@
+{
+  "schema_version": "care-ecg.knowledge-graph/v1",
+  "graph_id": "ptbxl-superclasses",
+  "title": "PTB-XL diagnostic superclasses",
+  "description": "Dataset ontology for the five PTB-XL diagnostic superclass labels. These taxonomy edges are not physiological causal claims.",
+  "provenance": [
+    {
+      "provenance_id": "ptbxl-scp-statements",
+      "title": "PTB-XL SCP statements metadata",
+      "kind": "dataset_metadata",
+      "locator": "scp_statements.csv",
+      "metadata": {
+        "scope": "diagnostic_class"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "node_id": "ptbxl:dataset",
+      "kind": "dataset",
+      "label": "PTB-XL",
+      "description": "PTB-XL dataset diagnostic ontology.",
+      "aliases": [],
+      "model_variable": null,
+      "provenance_id": "ptbxl-scp-statements",
+      "metadata": {}
+    },
+    {
+      "node_id": "ptbxl:superclass:NORM",
+      "kind": "diagnostic_superclass",
+      "label": "NORM",
+      "description": "PTB-XL diagnostic superclass label NORM.",
+      "aliases": [],
+      "model_variable": null,
+      "provenance_id": "ptbxl-scp-statements",
+      "metadata": {}
+    },
+    {
+      "node_id": "ptbxl:superclass:MI",
+      "kind": "diagnostic_superclass",
+      "label": "MI",
+      "description": "PTB-XL diagnostic superclass label MI.",
+      "aliases": [],
+      "model_variable": null,
+      "provenance_id": "ptbxl-scp-statements",
+      "metadata": {}
+    },
+    {
+      "node_id": "ptbxl:superclass:STTC",
+      "kind": "diagnostic_superclass",
+      "label": "STTC",
+      "description": "PTB-XL diagnostic superclass label STTC.",
+      "aliases": [],
+      "model_variable": null,
+      "provenance_id": "ptbxl-scp-statements",
+      "metadata": {}
+    },
+    {
+      "node_id": "ptbxl:superclass:CD",
+      "kind": "diagnostic_superclass",
+      "label": "CD",
+      "description": "PTB-XL diagnostic superclass label CD.",
+      "aliases": [],
+      "model_variable": null,
+      "provenance_id": "ptbxl-scp-statements",
+      "metadata": {}
+    },
+    {
+      "node_id": "ptbxl:superclass:HYP",
+      "kind": "diagnostic_superclass",
+      "label": "HYP",
+      "description": "PTB-XL diagnostic superclass label HYP.",
+      "aliases": [],
+      "model_variable": null,
+      "provenance_id": "ptbxl-scp-statements",
+      "metadata": {}
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "ptbxl:contains:NORM",
+      "source": "ptbxl:dataset",
+      "target": "ptbxl:superclass:NORM",
+      "relation": "contains_label",
+      "statement": "PTB-XL defines NORM as a diagnostic superclass label.",
+      "provenance_id": "ptbxl-scp-statements",
+      "include_in_retrieval": true,
+      "allowed_as_prior": false,
+      "metadata": {}
+    },
+    {
+      "edge_id": "ptbxl:contains:MI",
+      "source": "ptbxl:dataset",
+      "target": "ptbxl:superclass:MI",
+      "relation": "contains_label",
+      "statement": "PTB-XL defines MI as a diagnostic superclass label.",
+      "provenance_id": "ptbxl-scp-statements",
+      "include_in_retrieval": true,
+      "allowed_as_prior": false,
+      "metadata": {}
+    },
+    {
+      "edge_id": "ptbxl:contains:STTC",
+      "source": "ptbxl:dataset",
+      "target": "ptbxl:superclass:STTC",
+      "relation": "contains_label",
+      "statement": "PTB-XL defines STTC as a diagnostic superclass label.",
+      "provenance_id": "ptbxl-scp-statements",
+      "include_in_retrieval": true,
+      "allowed_as_prior": false,
+      "metadata": {}
+    },
+    {
+      "edge_id": "ptbxl:contains:CD",
+      "source": "ptbxl:dataset",
+      "target": "ptbxl:superclass:CD",
+      "relation": "contains_label",
+      "statement": "PTB-XL defines CD as a diagnostic superclass label.",
+      "provenance_id": "ptbxl-scp-statements",
+      "include_in_retrieval": true,
+      "allowed_as_prior": false,
+      "metadata": {}
+    },
+    {
+      "edge_id": "ptbxl:contains:HYP",
+      "source": "ptbxl:dataset",
+      "target": "ptbxl:superclass:HYP",
+      "relation": "contains_label",
+      "statement": "PTB-XL defines HYP as a diagnostic superclass label.",
+      "provenance_id": "ptbxl-scp-statements",
+      "include_in_retrieval": true,
+      "allowed_as_prior": false,
+      "metadata": {}
+    }
+  ],
+  "metadata": {
+    "diagnostic_superclasses": ["NORM", "MI", "STTC", "CD", "HYP"],
+    "causal_claims": false
+  }
+}

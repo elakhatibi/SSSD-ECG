@@ -1,0 +1,198 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://care-ecg.local/schemas/knowledge-graph.v1.json",
+  "title": "CARE-ECG Clinical Knowledge Graph v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "graph_id",
+    "title",
+    "provenance",
+    "nodes",
+    "edges"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "care-ecg.knowledge-graph/v1"
+    },
+    "graph_id": {
+      "$ref": "#/$defs/nonemptyString"
+    },
+    "title": {
+      "$ref": "#/$defs/nonemptyString"
+    },
+    "description": {
+      "type": "string"
+    },
+    "provenance": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/provenance"
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/node"
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/edge"
+      }
+    },
+    "metadata": {
+      "type": "object"
+    }
+  },
+  "$defs": {
+    "nonemptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provenance_id", "title", "kind"],
+      "properties": {
+        "provenance_id": {
+          "$ref": "#/$defs/nonemptyString"
+        },
+        "title": {
+          "$ref": "#/$defs/nonemptyString"
+        },
+        "kind": {
+          "enum": [
+            "dataset_metadata",
+            "publication",
+            "expert_review",
+            "model_specification"
+          ]
+        },
+        "locator": {
+          "type": ["string", "null"]
+        },
+        "metadata": {
+          "type": "object"
+        }
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_id", "kind", "label"],
+      "properties": {
+        "node_id": {
+          "$ref": "#/$defs/nonemptyString"
+        },
+        "kind": {
+          "enum": [
+            "dataset",
+            "diagnostic_superclass",
+            "diagnostic_subclass",
+            "scp_statement",
+            "model_variable"
+          ]
+        },
+        "label": {
+          "$ref": "#/$defs/nonemptyString"
+        },
+        "description": {
+          "type": "string"
+        },
+        "aliases": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "model_variable": {
+          "type": ["string", "null"]
+        },
+        "provenance_id": {
+          "type": ["string", "null"]
+        },
+        "metadata": {
+          "type": "object"
+        }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "edge_id",
+        "source",
+        "target",
+        "relation",
+        "statement",
+        "provenance_id"
+      ],
+      "properties": {
+        "edge_id": {
+          "$ref": "#/$defs/nonemptyString"
+        },
+        "source": {
+          "$ref": "#/$defs/nonemptyString"
+        },
+        "target": {
+          "$ref": "#/$defs/nonemptyString"
+        },
+        "relation": {
+          "enum": [
+            "contains_label",
+            "classified_as",
+            "subclass_of",
+            "causal_prior"
+          ]
+        },
+        "statement": {
+          "$ref": "#/$defs/nonemptyString"
+        },
+        "provenance_id": {
+          "$ref": "#/$defs/nonemptyString"
+        },
+        "include_in_retrieval": {
+          "type": "boolean"
+        },
+        "allowed_as_prior": {
+          "type": "boolean",
+          "default": false
+        },
+        "metadata": {
+          "type": "object"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "relation": {
+                "const": "causal_prior"
+              }
+            },
+            "required": ["relation"]
+          },
+          "then": {
+            "properties": {
+              "allowed_as_prior": {
+                "const": true
+              }
+            },
+            "required": ["allowed_as_prior"]
+          },
+          "else": {
+            "properties": {
+              "allowed_as_prior": {
+                "const": false
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

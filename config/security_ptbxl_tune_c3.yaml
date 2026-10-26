@@ -1,0 +1,103 @@
+schema_version: care-ecg-security-config.v1
+
+protocol:
+  phase: validation
+  query: Which diagnosis is most supported, and why?
+  targets: [T1, T2, T3, T4]
+  budgets: [1, 10, 50, 100]
+  seeds: [17, 42, 73]
+  validation_folds: [9]
+  heldout_folds: [10]
+  max_candidate_patients_per_target: null
+  max_eligible_patients_per_target: 100
+  defense: v1
+  validation_dataset_sha256: b15dc0b71d0400d0697d5b0cbdb4362aaf093ebeb3521d2ec1a21e0a4812755e
+  heldout_dataset_sha256: fd90c55c047d5f37a196e98aa127a83629eecd4622c653653fd9511cc33c1868
+
+attacks:
+  enabled:
+    - f0
+    - f1_pgd
+    - f1_cf
+    - f2_nes
+    - f2_simba
+    - f2_square
+    - f3_k1
+    - f3_k2
+    - f3_k3
+  common:
+    epsilon_mv: 0.02
+    step_size_mv: 0.002
+    steps: 40
+    restarts: 1
+    random_start: true
+    confidence: 3.0
+  f0:
+    matched_magnitude: null
+    match_statistic: median
+    match_reference_attacks:
+      - f1_pgd
+      - f1_cf
+      - f2_nes
+      - f2_simba
+      - f2_square
+      - f3_k1
+      - f3_k2
+      - f3_k3
+  f1_cf:
+    latent_weight: 1.0
+    latent_margin: 0.001
+  f2_nes:
+    sigma: 0.002
+    learning_rate: 0.004
+    samples_per_step: 4
+  f2_simba:
+    step_size_mv: 0.002
+  f2_square:
+    initial_fraction: 0.20
+    parameter_amplitude: 1.0
+  f3_k1:
+    diagnosis_weight: 1.0
+    retrieval_weight: 1.0
+    verifier_weight: 1.0
+    defense_weight: 0.0
+    black_box_method: nes
+  f3_k2:
+    diagnosis_weight: 1.0
+    retrieval_weight: 1.0
+    verifier_weight: 1.0
+    defense_weight: 0.0
+  f3_k3:
+    diagnosis_weight: 1.0
+    retrieval_weight: 1.0
+    verifier_weight: 1.0
+    defense_weight: 0.0
+
+constraints:
+  enabled: [s_inf, s2, s_spec, s_phys]
+  s_inf:
+    epsilon_mv: 0.02
+  s2:
+    epsilon_mv: 0.50
+    per_lead: true
+  s_spec:
+    epsilon_mv: 0.02
+    cutoff_hz: 40.0
+    max_high_frequency_ratio: 0.05
+    max_slew_mv: 0.01
+  s_phys:
+    nominal_rr_seconds: 0.8
+
+admissibility:
+  enabled: true
+  backend: scipy
+  required:
+    - heart_rate_bpm
+    - rhythm_irregularity
+    - pr_ms
+    - qrs_ms
+    - qtc_ms
+    - st_deviation_mv
+
+export:
+  excel: true
