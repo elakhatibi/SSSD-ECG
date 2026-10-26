@@ -1,21 +1,25 @@
+# Python
 __pycache__/
 *.py[cod]
+*.pyc
 .pytest_cache/
 .ruff_cache/
+.ipynb_checkpoints/
+*.egg-info/
+
+# Environments and local configuration
 .venv/
+venv/
+conda/
 .env*
+.env
 !.env.example
 .agents/
 .codex/
 .aws/
-artifacts/
-outputs/
-results/
-data/
-texts.txt
-/CARE-ECG Causal Agent-based Reasoning for Explainable and Counterfactual ECG Interpretation__.pdf
-/attack_models/*.pdf
-/attack_models/*.docx
+.vscode/
+
+# Models and serialized arrays
 *.npy
 *.npz
 *.pt
@@ -33,4 +37,19 @@ texts.txt
 *.edf
 *.mat
 *.hea
-*.egg-info/
+
+# Generated data, artifacts, and logs
+artifacts/
+outputs/
+results/
+data/
+datasets/
+data_folder_ptb_xl/
+logs/
+wandb/
+
+# Local source material
+texts.txt
+/CARE-ECG Causal Agent-based Reasoning for Explainable and Counterfactual ECG Interpretation__.pdf
+/attack_models/*.pdf
+/attack_models/*.docx
